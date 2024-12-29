@@ -1,0 +1,8 @@
+{
+    "name": "laza2/backend",
+    "description": "Backend PHP pour mon application avec React",
+    "type": "project",
+    "license": "MIT",
+    "minimum-stability": "stable",
+    "require": {}
+}
