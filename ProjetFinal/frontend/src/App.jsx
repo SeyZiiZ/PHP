@@ -1,25 +1,31 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import { Route, Routes } from "react-router-dom";
+import Navbar from "../components/layout/NavBar";
+import Footer from "../components/layout/Footer";
+import Home from "./pages/home";
+import Login from "./pages/Login";
+import NotFound from "./pages/NotFound";
+import Register from "./pages/Register";
+import Contact from "./pages/contact";
+
 
 const App = () => {
-    const [message, setMessage] = useState("");
-
-    useEffect(() => {
-        axios.get('/api/message')
-            .then(response => {
-                setMessage(response.data.message);
-            })
-            .catch(error => {
-                console.error("Erreur lors de l'appel API :", error);
-            });
-    }, []);
-
     return (
+      <>
+        <header>
+          <Navbar />
+        </header>
         <div>
-            <h1>React Frontend</h1>
-            <p>{message}</p>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />}/>
+            <Route path="/contact" element={<Contact />}/>
+            <Route path="*" element={<NotFound />} />
+          </Routes>
         </div>
+        <Footer />
+      </>
     );
-};
-
-export default App;
+  };
+  
+  export default App;
