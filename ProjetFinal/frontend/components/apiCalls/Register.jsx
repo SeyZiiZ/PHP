@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import {
   Card,
   Input,
@@ -67,18 +68,26 @@ export function RegisterComponent({ onSubmit }) {
           </Button>
         </form>
         <Button
-            variant="outlined"
-            size="lg"
-            className="flex h-12 border-blue-gray-200 items-center justify-center gap-2 mt-4"
-            fullWidth
-          >
-            <img
-              src={`https://www.material-tailwind.com/logos/logo-google.png`}
-              alt="google"
-              className="h-6 w-6"
-            />{" "}
-            sign in with google
-          </Button>
+          variant="outlined"
+          size="lg"
+          className="flex h-12 border-blue-gray-200 items-center justify-center gap-2 mt-4"
+          fullWidth
+        >
+          <img
+            src={`https://www.material-tailwind.com/logos/logo-google.png`}
+            alt="google"
+            className="h-6 w-6"
+          />{" "}
+          sign in with google
+        </Button>
+        <div className="mt-6 text-center">
+          <Typography variant="small" color="blue-gray">
+            Vous avez déjà un compte ?{" "}
+            <NavLink to="/login" className="text-light-blue-500 hover:underline">
+              Connectez-vous
+            </NavLink>
+          </Typography>
+        </div>
       </CardBody>
     </Card>
   );

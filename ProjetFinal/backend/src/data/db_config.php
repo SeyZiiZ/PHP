@@ -4,7 +4,7 @@ return [
     'host' => 'localhost',
     'dbname' => 'my_app',
     'username' => 'postgres',
-    'password' => 'yourpswd',
+    'password' => 'ZKE53LTP942!?',
 ];
 
 ?>

@@ -4,12 +4,16 @@
     "type": "project",
     "license": "MIT",
     "minimum-stability": "stable",
-    "require": {},
+    "require": {
+        "firebase/php-jwt": "^6.10"
+    },
     "autoload": {
     "psr-4": {
         "App\\": "src/",
         "App\\Controller\\": "src/Controller",
-        "App\\Composables\\": "src/Composables"
+        "App\\Composables\\": "src/Composables",
+        "App\\Model\\": "src/Model",
+        "App\\Data\\": "src/Data"
         }
     }
 }
