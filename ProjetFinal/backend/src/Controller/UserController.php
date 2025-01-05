@@ -10,6 +10,8 @@ class UserController {
         try {
             $userModel = new UserModel();
             $user = $userModel->getUserById($userId);
+            $userIncidents = $userModel->getUserIncident($userId);
+            $userIncidentsResolved = $userModel->getUserIncidentResolved($userId);
 
             if (!$user) {
                 http_response_code(404);
@@ -19,6 +21,8 @@ class UserController {
             return [
                 "Message" => "Données utilisateur récupérées.",
                 "User" => $user,
+                "Incidents" => $userIncidents,
+                "IncidentsResolved" => $userIncidentsResolved
             ];
         } catch (\Exception $e) {
             http_response_code(500);

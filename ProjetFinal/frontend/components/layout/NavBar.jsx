@@ -1,42 +1,13 @@
-import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { jwtDecode } from "jwt-decode";
+import useAuthentication from "../../composables/checkAuthentication";
 
 const Navbar = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const isAuthenticated = useAuthentication();
 
   const linkStyle = ({ isActive }) =>
     `text-gray-600 hover:text-blue-500 transition-colors ${
-      isActive ? "font-bold text-blue-500" : ""
-    }`;
-
-  const checkAuthentication = () => {
-    const token = localStorage.getItem("jwt");
-    if (!token) {
-      setIsAuthenticated(false);
-      return;
-    }
-
-    try {
-      const decoded = jwtDecode(token);
-      const currentTime = Date.now() / 1000;
-      setIsAuthenticated(decoded.exp > currentTime);
-    // eslint-disable-next-line no-unused-vars
-    } catch (error) {
-      setIsAuthenticated(false);
-    }
-  };
-
-  useEffect(() => {
-    checkAuthentication();
-
-    const handleStorageChange = () => checkAuthentication();
-    window.addEventListener("storage", handleStorageChange);
-
-    return () => {
-      window.removeEventListener("storage", handleStorageChange);
-    };
-  }, []);
+    isActive ? "font-bold text-blue-500" : ""
+  }`;
 
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50">

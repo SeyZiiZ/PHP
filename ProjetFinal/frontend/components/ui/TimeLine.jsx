@@ -46,7 +46,7 @@ export function TimelineComponent() {
               color="gray"
               className="font-normal text-gray-600"
             >
-              Une fois l`incident validé, il est assigné à l`équipe appropriée
+              Une fois l`incident validé, il est assigné à son équipe ou a lui meme
               en fonction de la nature du problème et de l`urgence.
             </Typography>
           </TimelineBody>

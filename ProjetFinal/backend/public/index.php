@@ -17,6 +17,8 @@ use App\Controller\MessageController;
 use App\Controller\RegisterController;
 use App\Controller\LoginController;
 use App\Controller\UserController;
+use App\Controller\IncidentController;
+use App\Controller\ContactController;
 
 $router = new Router();
 
@@ -59,6 +61,29 @@ $router->add('/api/user', function ($params) {
     $userController = new UserController();
     $response = $userController->getUserData($decoded->userId);
 
+    echo json_encode($response);
+});
+
+$router->add('/api/incident', function () {
+    $decoded = authMiddleware();
+    $data = json_decode(file_get_contents('php://input'), true);
+
+    $data['userId'] = $decoded->userId;
+
+    $controller = new IncidentController();
+    $response = $controller->incident($data);
+
+    header('Content-Type: application/json');
+    echo json_encode($response);
+});
+
+$router->add('/api/contact', function () {
+    $data = json_decode(file_get_contents('php://input'), true);
+
+    $controller = new ContactController;
+    $response = $controller->contact($data);
+
+    header('Content-Type: application/json');
     echo json_encode($response);
 });
 

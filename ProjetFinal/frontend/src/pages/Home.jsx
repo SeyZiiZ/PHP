@@ -2,8 +2,11 @@ import { NavLink } from "react-router-dom";
 import landingPageImage from "../assets/images/landingPageImage.png";
 import { TimelineComponent } from "../../components/ui/TimeLine";
 import AccordionComponent from "../../components/ui/Accordion";
+import useAuthentication from "../../composables/checkAuthentication";
 
 const Home = () => {
+  const isAuthenticated = useAuthentication();
+
   return (
     <>
       <div className="container mx-auto px-4">
@@ -18,7 +21,7 @@ const Home = () => {
               productivité.
             </p>
             <NavLink
-              to={"/Register"}
+              to={isAuthenticated ? "/dashboard" : "/login"}
               className="bg-blue-500 text-white px-8 py-3 rounded-lg hover:bg-blue-600 transition-colors"
             >
               Commencer

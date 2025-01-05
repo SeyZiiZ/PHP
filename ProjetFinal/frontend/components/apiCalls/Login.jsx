@@ -64,6 +64,22 @@ export function LoginComponent({ onSubmit }) {
           />{" "}
           connect in with google
         </Button>
+        <div className="mt-6 text-center">
+          <p className="text-sm text-gray-600">
+            En vous connectant, vous acceptez nos{" "}
+            <a href="" className="text-blue-500 underline">
+              conditions d`utilisation
+            </a>{" "}
+            et notre{" "}
+            <a
+              href=""
+              className="text-blue-500 underline"
+            >
+              politique de confidentialité
+            </a>
+            .
+          </p>
+        </div>
       </CardBody>
     </Card>
   );

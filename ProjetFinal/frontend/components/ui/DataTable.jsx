@@ -1,24 +1,49 @@
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { DataTable } from "primereact/datatable";
+import { Column } from "primereact/column";
 
-import { useState, useEffect } from 'react';
-import { DataTable } from 'primereact/datatable';
-import { Column } from 'primereact/column';
-import { ProductService } from './service/ProductService';
+// eslint-disable-next-line react/prop-types
+export default function DataTableComponent({ data, personnalText }) {
+  const [products, setProducts] = useState([]);
+  const navigate = useNavigate();
 
-export default function DataTableComponent() {
-    const [products, setProducts] = useState([]);
+  useEffect(() => {
+    setProducts(data || []);
+  }, [data]);
 
-    useEffect(() => {
-        ProductService.getProductsMini().then(data => setProducts(data));
-    }, []);
+  const onRowClick = (rowData) => {
+    localStorage.setItem("selectedIncident", JSON.stringify(rowData));
+    navigate(`/details/${rowData.code}`);
+  };
 
-    return (
-        <div className="card">
-            <DataTable value={products} tableStyle={{ minWidth: '50rem' }}>
-                <Column field="code" header="Code"></Column>
-                <Column field="name" header="Name"></Column>
-                <Column field="category" header="Category"></Column>
-                <Column field="quantity" header="Quantity"></Column>
-            </DataTable>
-        </div>
-    );
+  const statusBodyTemplate = (rowData) => {
+    return rowData.status === false ? "À faire" : "Complété";
+  };
+
+  return (
+    <div className="mb-12">
+      <div>
+        <p className="font-bold text-2xl mb-4">{personnalText}</p>
+      </div>
+      <div className="card">
+        <DataTable
+          value={products}
+          tableStyle={{ minWidth: "50rem" }}
+          onRowClick={(e) => onRowClick(e.data)}
+          rowClassName={() => "clickable-row"}
+        >
+          <Column field="code" header="Code"></Column>
+          <Column field="title" header="Titre"></Column>
+          <Column
+            field="status"
+            header="Statut"
+            body={statusBodyTemplate}
+          ></Column>
+          <Column field="priority" header="Priorité"></Column>
+          <Column field="created_at" header="Créé le"></Column>
+        </DataTable>
+      </div>
+    </div>
+  );
 }

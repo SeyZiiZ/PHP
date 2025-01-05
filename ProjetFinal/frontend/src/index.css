@@ -32,4 +32,11 @@ html {
     background-color: #2195f3;
 }
 
+.clickable-row {
+    cursor: pointer;
+  }
   
+  .clickable-row:hover {
+    background-color: #f0f0f0;
+    transition: background-color 0.2s ease-in-out;
+  }
