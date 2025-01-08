@@ -21,7 +21,6 @@ const Login = () => {
               navigate("/dashboard");
               window.location.reload();
             }, 1500);
-
           }
 
         } catch (error) {

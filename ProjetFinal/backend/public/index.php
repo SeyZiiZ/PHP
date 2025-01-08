@@ -64,6 +64,16 @@ $router->add('/api/user', function ($params) {
     echo json_encode($response);
 });
 
+$router->add('/api/contact', function () {
+    $data = json_decode(file_get_contents('php://input'), true);
+
+    $controller = new ContactController;
+    $response = $controller->contact($data);
+
+    header('Content-Type: application/json');
+    echo json_encode($response);
+});
+
 $router->add('/api/incident', function () {
     $decoded = authMiddleware();
     $data = json_decode(file_get_contents('php://input'), true);
@@ -77,11 +87,27 @@ $router->add('/api/incident', function () {
     echo json_encode($response);
 });
 
-$router->add('/api/contact', function () {
+$router->add('/api/deleteIncident', function () {
+    $decoded = authMiddleware();
     $data = json_decode(file_get_contents('php://input'), true);
 
-    $controller = new ContactController;
-    $response = $controller->contact($data);
+    $data['userId'] = $decoded->userId;
+
+    $controller = new IncidentController();
+    $response = $controller->deleteIncident($data);
+
+    header('Content-Type: application/json');
+    echo json_encode($response);
+});
+
+$router->add('/api/updateIncident', function () {
+    $decoded = authMiddleware();
+    $data = json_decode(file_get_contents('php://input'), true);
+
+    $data['userId'] = $decoded->userId;
+
+    $controller = new IncidentController();
+    $response = $controller->updateIncident($data);
 
     header('Content-Type: application/json');
     echo json_encode($response);

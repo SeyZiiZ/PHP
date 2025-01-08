@@ -30,6 +30,43 @@ class IncidentController {
             ];
         }
     }
+
+    public function deleteIncident($data) {
+        try {
+            $incidentModel = new IncidentModel();
+
+            $response = $incidentModel->deleteIncident(
+                $data['userId'],
+                $data['code']
+            );
+
+            return $response;
+            
+        } catch (\PDOException $e) {
+            return [
+                "Message" => "Erreur lors de l'ajout de l'incident",
+                "Error" => $e->getMessage()
+            ];
+        }
+    }
+
+    public function updateIncident($data) {
+        try {
+            $incidentModel = new IncidentModel();
+
+            $response = $incidentModel->deleteIncident(
+                $data['userId'],
+            );
+
+            return $response;
+
+        } catch (\PDOExceptin $e) {
+            return [
+                "Message" => "Erreur lors de l'ajout de l'incident",
+                "Error" => $e->getMessage()
+            ];
+        }
+    }
 }
 
 ?>

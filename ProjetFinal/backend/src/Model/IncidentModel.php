@@ -43,4 +43,32 @@ class IncidentModel {
             ];
         }
     }
+
+    public function deleteIncident($id, $code) {
+
+        try {
+            $stmt = $this->pdo->prepare
+            ("
+                DELETE FROM incidents
+                WHERE user_id = :id
+                AND code = :code
+            ");
+            $stmt->execute([
+                ':id' => $id,
+                ':code' => $code
+            ]);
+    
+            return [
+                "Message" => "Incident supprimer avec succès",
+                "Status" => true,
+            ];
+            
+        } catch (\PDOException $e) {
+            return [
+                "Message" => "Erreur lors de l'ajout de l'incident",
+                "Error" => $e->getMessage()
+            ];
+        }
+
+    }
 }

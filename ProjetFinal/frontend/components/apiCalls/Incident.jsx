@@ -92,9 +92,9 @@ export function IncidentComponent({ onSubmit }) {
               value={selectedPriority}
               onChange={(e) => setSelectedPriority(e.value)}
               options={Priorities}
-              optionLabel="pname"
+              optionLabel="name"
               optionGroupLabel="name"
-              optionGroupChildren={["levels", "sublevels"]}
+              optionGroupChildren={[]}
               className="w-full md:w-14rem border-slate-600"
               breakpoint="767px"
               placeholder="Sélectionnez une priorité"
