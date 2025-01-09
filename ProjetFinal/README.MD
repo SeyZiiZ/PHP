@@ -31,7 +31,7 @@ Le projet est organisé en trois dossiers principaux :
   ```bash
   cd frontend
   npm install
-  npm start
+  npm run dev
 - **Lancement** : Cette commande démarre le serveur de développement à l'adresse par défaut avec vite
 
 ### 3️⃣ Base de Données
