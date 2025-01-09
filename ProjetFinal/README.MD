@@ -36,5 +36,5 @@ Le projet est organisé en trois dossiers principaux :
 
 ### 3️⃣ Base de Données
 - **Localisation** : Dossier `databaseTables`
-- **Initialisation** : Importez le fichier PGdatabase.sql dans votre système de gestion de base de données.
+- **Initialisation** : Importez le fichier PGdatabase.sql dans votre système de gestion de base de données (PostgreSQL, sinon adaptez les tables pour un autre SGBD.).
 - **Connexion** : Assurez-vous que les informations de connexion à la base de données sont correctement configurées dans le fichier \backend\src\Data\db_config.php du backend.
