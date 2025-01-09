@@ -110,7 +110,6 @@ export default function BoxInfo({ id, incidentData: initialData, onSave }) {
                   className="ml-2 px-2 py-1 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
                   <option value="false">À faire</option>
-                  <option value="1">En cours</option>
                   <option value="true">Complété</option>
                 </select>
               ) : (

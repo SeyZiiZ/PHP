@@ -54,8 +54,13 @@ class IncidentController {
         try {
             $incidentModel = new IncidentModel();
 
-            $response = $incidentModel->deleteIncident(
+            $response = $incidentModel->updateIncident(
                 $data['userId'],
+                $data['code'],
+                $data['description'],
+                $data['priority'],
+                $data['status'],
+                $data['title']
             );
 
             return $response;

@@ -65,10 +65,44 @@ class IncidentModel {
             
         } catch (\PDOException $e) {
             return [
-                "Message" => "Erreur lors de l'ajout de l'incident",
+                "Message" => "Erreur lors de la suppression de l'incident",
                 "Error" => $e->getMessage()
             ];
         }
+    }
 
+    public function updateIncident($userId, $code, $description, $priority, $status, $title) {
+        try {
+            $stmt = $this->pdo->prepare
+            ("
+                UPDATE incidents
+                SET 
+                    description = :description,
+                    priority = :priority,
+                    status = :status,
+                    title = :title
+                WHERE user_id = :id
+                AND code = :code
+            ");
+            $stmt->execute([
+                ':id' => $userId,
+                ':code' => $code,
+                'description' => $description,
+                'priority' => $priority,
+                'status' => $status,
+                'title' => $title
+            ]);
+    
+            return [
+                "Message" => "Incident modifier avec succès",
+                "Status" => true,
+            ];
+
+        } catch (\PDOException $e) {
+            return [
+                "Message" => "Erreur lors de la modification de l'incident",
+                "Error" => $e->getMessage()
+            ];
+        }
     }
 }

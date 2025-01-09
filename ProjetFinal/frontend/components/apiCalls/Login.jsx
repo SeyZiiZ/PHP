@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import {
   Card,
   Input,
@@ -51,19 +52,17 @@ export function LoginComponent({ onSubmit }) {
             Continuer
           </Button>
         </form>
-        <Button
-          variant="outlined"
-          size="lg"
-          className="flex h-12 border-blue-gray-200 items-center justify-center gap-2 mt-4"
-          fullWidth
-        >
-          <img
-            src={`https://www.material-tailwind.com/logos/logo-google.png`}
-            alt="google"
-            className="h-6 w-6"
-          />{" "}
-          connect in with google
-        </Button>
+        <div className="mt-6 text-center">
+          <Typography variant="small" color="blue-gray">
+            Vous n&apos;avez pas de compte ?{" "}
+            <NavLink
+              to="/register"
+              className="text-light-blue-500 hover:underline"
+            >
+              Inscrivez-vous
+            </NavLink>
+          </Typography>
+        </div>
         <div className="mt-6 text-center">
           <p className="text-sm text-gray-600">
             En vous connectant, vous acceptez nos{" "}

@@ -10,6 +10,7 @@ const Details = () => {
   const navigate = useNavigate();
   const [incidentData, setIncidentData] = useState(null);
   const [message, setMessage] = useState("");
+  const [pendingChanges, setPendingChanges] = useState({});
 
   useEffect(() => {
     const storedIncident = localStorage.getItem("selectedIncident");
@@ -20,21 +21,34 @@ const Details = () => {
     }
   }, []);
 
-  const updateDescription = (newDescription) => {
-    setIncidentData((prevData) => ({
-      ...prevData,
-      description: newDescription,
+  const handleBoxInfoChange = (updatedData) => {
+    setPendingChanges(prev => ({
+      ...prev,
+      ...updatedData
     }));
   };
 
-  const handleUpdate = async (updatedData) => {
-    try {
-      setIncidentData(updatedData);
-      const token = localStorage.getItem("jwt");
+  const handleDescriptionChange = (newDescription) => {
+    setPendingChanges(prev => ({
+      ...prev,
+      description: newDescription
+    }));
+  };
 
+  const handleUpdate = async () => {
+    try {
+      const updatedData = {
+        ...incidentData,
+        ...pendingChanges
+      };
+      
+      console.log(updatedData);
+
+      const token = localStorage.getItem("jwt");
+      
       const response = await axios.put(
         "http://localhost:8000/api/updateIncident",
-        { id, ...updatedData },
+        { ...updatedData },
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -42,8 +56,11 @@ const Details = () => {
         }
       );
 
-      const { Message } = response.data;
+      const { Message, Error } = response.data;
+      console.log(Error);
       setMessage(Message);
+      setIncidentData(updatedData);
+      setPendingChanges({});
       
     } catch (error) {
       setMessage("Erreur lors de la mise à jour : " + error.message);
@@ -86,7 +103,7 @@ const Details = () => {
     );
   }
 
-  return (
+    return (
     <div className="container mx-auto px-4 py-10">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold">Détails de l&apos;incident</h1>
@@ -94,6 +111,7 @@ const Details = () => {
           <button
             onClick={handleUpdate}
             className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md transition-colors"
+            disabled={Object.keys(pendingChanges).length === 0}
           >
             Enregistrer les modifications
           </button>
@@ -105,10 +123,14 @@ const Details = () => {
           </button>
         </div>
       </div>
-      <BoxInfo id={id} incidentData={incidentData} onSave={handleUpdate}/>
+      <BoxInfo 
+        id={id} 
+        incidentData={incidentData} 
+        onSave={handleBoxInfoChange}
+      />
       <DescriptionBox
         description={incidentData.description}
-        onSave={updateDescription}
+        onSave={handleDescriptionChange}
       />
       <p>{message}</p>
     </div>
