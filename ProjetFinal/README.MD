@@ -23,6 +23,9 @@ Le projet est organisé en trois dossiers principaux :
   ```bash
   cd backend
   composer install
+- **Lancement** : Cette commande démarre le serveur de développement
+  ```bash
+  php -S localhost:8000 public/index.php
 
 ### 2️⃣ Frontend (React)
 - **Localisation** : Dossier `frontend`
